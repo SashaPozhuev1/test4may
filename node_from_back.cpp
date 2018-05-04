@@ -5,6 +5,26 @@ struct node_t {
 	int value;
 };
 
+struct node2_t {
+	node2_t * left;
+	node2_t * right;
+	int value;
+};
+
+node2_t * mirror(node2_t * root){
+	if (root->right || root->left) {
+		std::swap(root->left, root->right);
+	}
+	if (root->left) {
+		mirror(root->left);
+	}
+	if (root->right) {
+		mirror(root->right);
+	}
+
+	return root;
+}
+
 node_t * node_from_back(node_t * head, unsigned int idx) {
 	if (!head) {
 		return nullptr;
