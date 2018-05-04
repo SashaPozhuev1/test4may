@@ -6,29 +6,31 @@ struct node_t {
 };
 
 node_t * node_from_back(node_t * head, unsigned int idx) {
-	if (head) {
-		unsigned int count = 1;
-		node_t * curr = head;
+	if (!head) {
+		return nullptr;
+	}
 
-		while (curr->next) {
+	unsigned int count = 1;
+	node_t * curr = head;
+
+	while (curr->next) {
+		curr = curr->next;
+		++count;
+	}
+
+	curr = head;
+
+	if (count - idx > 0) {
+		count = count - idx;
+		while (count > 1) {
 			curr = curr->next;
-			++count;
-		}
-		curr = head;
-
-		if (count - idx > 0) {
-			unsigned int revers_idx = count - idx - 1;
-			while (revers_idx) {
-				curr = curr->next;
-				--revers_idx;
-			}
-			return curr;
-		}
-		else {
-			throw std::logic_error("big idx");
+			--count;
 		}
 	}
-	return nullptr;
+	else {
+		throw std::out_of_range("big idx");
+	}
+	return curr;
 }
 
 int main()
