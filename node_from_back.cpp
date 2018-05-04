@@ -37,19 +37,20 @@ bool has_cycle(node_t * head) {
 	if (!head) {
 		throw std::logic_error("empty head");
 	}
-
 	node_t * curr = head;
 	node_t * son = head;
 	while (curr->next) {
+		son = curr;
 		while (son->next) {
-			son = son->next;
-			if (son == curr) {
+			
+			if (son->next == curr) {
 				return true;
 			}
+			
+			son = son->next;
 		}
 		curr = curr->next;
 	}
-
 	return false;
 }
 
