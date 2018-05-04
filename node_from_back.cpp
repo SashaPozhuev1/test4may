@@ -33,6 +33,26 @@ node_t * node_from_back(node_t * head, unsigned int idx) {
 	return curr;
 }
 
+bool has_cycle(node_t * head) {
+	if (!head) {
+		throw std::logic_error("empty head");
+	}
+
+	node_t * curr = head;
+	node_t * son = head;
+	while (curr->next) {
+		while (son->next) {
+			son = son->next;
+			if (son == curr) {
+				return true;
+			}
+		}
+		curr = curr->next;
+	}
+
+	return false;
+}
+
 int main()
 {
 	node_t * root = new node_t;
