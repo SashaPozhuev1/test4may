@@ -12,6 +12,7 @@ struct node2_t {
 };
 
 node2_t * mirror(node2_t * root){
+	if(root){
 	if (root->right || root->left) {
 		std::swap(root->left, root->right);
 	}
@@ -21,8 +22,9 @@ node2_t * mirror(node2_t * root){
 	if (root->right) {
 		mirror(root->right);
 	}
-
 	return root;
+	}
+	return nullptr;
 }
 
 node_t * node_from_back(node_t * head, unsigned int idx) {
